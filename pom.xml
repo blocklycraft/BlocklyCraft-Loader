@@ -10,8 +10,46 @@
         </repository>
     </repositories>
     <groupId>cn.orecraft.mc</groupId>
-    <artifactId>BlocklyCraft</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>${env.PLUGIN_NAME}</artifactId>
+    <version>${env.PLUGIN_VERSION}</version>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>cn.orecraft.mc</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>cn.orecraft.blocklycraft</pattern>
+                                    <shadedPattern>${env.PLUGIN_PACKAGE}</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>

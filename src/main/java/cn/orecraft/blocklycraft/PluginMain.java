@@ -1,4 +1,5 @@
-package cn.orecraft.blocklycraft;/*
+package cn.orecraft.blocklycraft;
+/*
  * Created on 2019/5/26
  * Author: MaHua_A
  * Copyright 2019 by OreCraft Studio
