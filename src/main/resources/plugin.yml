@@ -1,0 +1,3 @@
+name: ${env.PLUGIN_NAME}
+version: ${env.PLUGIN_VERSION}
+main: ${env.PLUGIN_PACKAGE}.PluginMain
