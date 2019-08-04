@@ -20,38 +20,28 @@ import java.io.Reader;
 
 
 public class PluginMain extends JavaPlugin {
-    public ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("Nashorn");
+    private ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("Nashorn");
 
-    @Override
-    public void onLoad(){
-        Bukkit.getLogger().info("Loading scripts.....");
-        loadjs("/scripts/bootstrap.js");
-
-    }
     @Override
     public void onEnable(){
-
-    }
-    @Override
-    public void onDisable(){
-        Bukkit.getLogger().info("Unloading scripts.....");
-    }
-    public  void loadjs(String path){
-
         try {
-            BufferedReader  reader = new BufferedReader(new InputStreamReader(PluginMain.class.getResourceAsStream(path),"UTF-8"));
+            String scriptPath = "/bundle.js";
+            BufferedReader  reader = new BufferedReader(new InputStreamReader(PluginMain.class.getResourceAsStream(scriptPath),"UTF-8"));
             StringBuffer buffer = new StringBuffer();
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null){
                 buffer.append(line);
             }
             scriptEngine.eval(buffer.toString());
             reader.close();
-        } catch (ScriptException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Bukkit.getLogger().warning("Oops!We have serious problems.This plugin was accidentally modified?");
+            Bukkit.getPluginManager().disablePlugin(this);
         }
     }
-
+    @Override
+    public void onDisable(){
+        Bukkit.getLogger().info("Unloading scripts.....");
+    }
 }
