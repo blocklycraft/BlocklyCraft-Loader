@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 
 
 public class PluginMain extends JavaPlugin {
-    private ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("Nashorn");
+    private ScriptEngine scriptEngine = new ScriptEngineManager(null).getEngineByName("Nashorn");
 
     @Override
     public void onEnable() {
